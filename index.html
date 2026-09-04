@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src/style.css">
+    <title>tictactoe</title>
+  </head>
+  <body>
+  <header class="container-title">
+    <h1 class="title-tictactoe">tictactoe</h1>
+  </header>
+  <main class="container-game">
+    <div class="setup-form-overlay">
+      <form id="setup-form" class="setup-form">
+        <fieldset class="label-setup-form">
+          <legend>Mode de jeu</legend>
+          <label>
+            1 joueur (contre l'IA)
+            <input type="radio" name="mode" value="solo" checked>
+          </label>
+          <label>
+            2 joueurs
+            <input type="radio" name="mode" value="duo" id="input-duo">
+          </label>
+        </fieldset>
+        <label class="label-setup-form">
+          Pseudo
+          <input type="text" name="username" required/>
+        </label>
+        <label class="label-setup-form" data-mode="duo">
+          Pseudo joueur 2
+          <input type="text" name="username2"/>
+        </label>
+        <label class="label-setup-form">
+          Taille du tableau
+          <select name="size">
+            <option value="3">Défaut 3x3</option>
+            <option value="4">4x4</option>
+            <option value="5">5x5</option>
+            <option value="6">6x6</option>
+          </select>
+        </label>
+        <label class="label-setup-form">
+          Choix du pion
+          <select name="pawn">
+            <option value="X">X</option>
+            <option value="O">O</option>
+          </select>
+        </label>
+        <label class="label-setup-form" data-mode="solo">
+          Difficulté
+          <select name="difficulty">
+            <option value="easy">Facile</option>
+            <option value="normal">Normal</option>
+          </select>
+        </label>
+        <button type="submit">Valider</button>
+      </form>
+    </div>
+    <div id="board"></div>
+  </main>
+
+  <dialog id="end-screen">
+    <div class="container-end-message">
+      <p class="end-message"></p>
+    </div>
+    <div class="container-restart">
+      <button type="button" class="restart-dialog">Rejouer</button>
+      <button type="button" class="new-game-dialog">Nouvelle partie</button>
+    </div>
+  </dialog>
+
+  <script type="module" src="src/main.ts"></script>
+  </body>
+</html>
