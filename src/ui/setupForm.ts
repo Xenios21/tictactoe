@@ -1,5 +1,5 @@
-import type {Difficulty, GameMode, Player} from "./types/gameState.types.ts";
-import type {GameSettings} from "./types/gameForm.types.ts";
+import type {Difficulty, GameMode, Player} from "../game/game.types.ts";
+import type {GameSettings} from "./form.types.ts";
 
 const overlay = document.querySelector<HTMLElement>('.setup-form-overlay')!;
 const form = document.querySelector<HTMLFormElement>('#setup-form')!;
@@ -58,6 +58,15 @@ export function bindSetupForm(onSubmit: (settings: GameSettings) => void) {
 
     form.querySelectorAll<HTMLInputElement>('input[name="mode"]')
         .forEach((input) => input.addEventListener('change', syncModeFields));
+
+}
+
+export function bindSetupMenu(onOpen: () => void){
+    document.querySelector<HTMLButtonElement>('#setup-menu')!.addEventListener('click', onOpen);
+}
+
+export function bindCloseMenu(onClose: () => void){
+    form.querySelector<HTMLButtonElement>('#close-menu')!.addEventListener('click', onClose);
 }
 
 function setField(name: string, value: string){

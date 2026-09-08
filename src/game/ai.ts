@@ -1,7 +1,5 @@
-import type {Difficulty, GameState, Player} from "./types/gameState.types.ts";
-import {playMove} from "./game.js";
-
-
+import type {Difficulty, GameState, Player} from "./game.types.ts";
+import {playMove} from "./game.ts";
 
 export function chooseAiMove(state: GameState, difficulty: Difficulty): number {
     const ai = state.currentPlayer;

@@ -7,8 +7,15 @@ export type GameMode = 'solo' | 'duo';
 export interface GameState {
     board: Cell[];
     size: number;
+    score: Record<Player, number>;
     winLength: number;
     currentPlayer: Player;
+    status: GameStatus;
+    winner: Player | null;
+    winningCells: number[];
+}
+
+export interface MoveResult{
     status: GameStatus;
     winner: Player | null;
     winningCells: number[];

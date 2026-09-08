@@ -1,4 +1,5 @@
-import type {Cell, GameState, GameStatus, Player} from "./types/gameState.types.ts";
+import type {Cell, GameState, MoveResult, Player} from "./game.types.ts";
+import {incrementScore} from "./score.ts";
 
 export const DIRECTIONS = [
     [0,1],
@@ -6,12 +7,6 @@ export const DIRECTIONS = [
     [1,1],
     [1,-1],
 ] as const;
-
-export interface MoveResult{
-    status: GameStatus;
-    winner: Player | null;
-    winningCells: number[];
-}
 
 export function playMove(state: GameState, index: number): GameState{
     if(state.status !== 'playing'){
@@ -31,13 +26,14 @@ export function playMove(state: GameState, index: number): GameState{
         ...state,
         board,
         currentPlayer: state.currentPlayer === 'X' ? 'O' : 'X',
+        score: result.status === 'win' ? incrementScore(state.score, result.winner!) : state.score,
         status: result.status,
         winner: result.winner,
         winningCells: result.winningCells,
     };
 }
 
-export function collectLine(
+function collectLine(
     board: Cell[],
     size: number,
     index: number,
@@ -45,8 +41,8 @@ export function collectLine(
     dCol: number,
 ): number[]{
 
-    const player = board[index]; // permet de savoir quel coup à été joué soit X soit O
-    const cells = [index]; // Le tableau contenant les cellules qui vont être compté (On ajoute directement celle qu'on vient de jouer)
+    const player = board[index];
+    const cells = [index];
 
     const startRow = Math.floor(index / size);
     const startCol = index % size;
@@ -71,7 +67,7 @@ export function collectLine(
 }
 
 
-export function checkWin(board: Cell[], size: number, winLength: number, index: number): MoveResult{
+function checkWin(board: Cell[], size: number, winLength: number, index: number): MoveResult{
     for (const [dRow, dCol] of DIRECTIONS){
         const cells = collectLine(board,size,index,dRow, dCol);
 

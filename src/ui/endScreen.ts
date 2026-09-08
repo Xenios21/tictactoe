@@ -1,4 +1,4 @@
-import type {GameState, Player} from "./types/gameState.types.ts";
+import type {GameState, Player} from "../game/game.types.ts";
 
 const dialog = document.querySelector<HTMLDialogElement>('#end-screen')!;
 
@@ -10,11 +10,12 @@ export function renderEndScreen(state: GameState, usernames: Record<Player, stri
         return;
     }
 
-
-
-    message.textContent = state.status === 'win'
-    ?  `${usernames[state.winner!]} a gagné !`
+    message.textContent = state.winner
+        ? `${usernames[state.winner]} a gagné !`
         : 'Match nul';
+
+    message.classList.toggle('is-x', state.winner === 'X');
+    message.classList.toggle('is-o', state.winner === 'O');
 
     dialog.showModal();
 }

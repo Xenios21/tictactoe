@@ -7,30 +7,47 @@
     <title>tictactoe</title>
   </head>
   <body>
-  <header class="container-title">
+  <header>
     <h1 class="title-tictactoe">tictactoe</h1>
+    <div class="container-score">
+      <p id="score-player1"></p>
+      <p id="score-player2"></p>
+    </div>
   </header>
-  <main class="container-game">
+  <div class="game">
+    <div id="settings">
+      <button id="mute" type="button" class="btn-pixel btn-pixel--dark">Mute</button>
+      <button id="setup-menu" type="button" class="btn-pixel btn-pixel--dark">Menu</button>
+    </div>
+    <div>
+      <h4 class="title-history blink">Game history</h4>
+      <ul id="history"></ul>
+      <button id="delete-history" type="button" class="btn-pixel btn-pixel--dark">Delete</button>
+    </div>
+    <audio src="./src/assets/2021-08-30_-_Boss_Time_-_www.FesliyanStudios.com.mp3" loop></audio>
+    <main class="container-game">
+      <div id="board"></div>
+    </main>
     <div class="setup-form-overlay">
       <form id="setup-form" class="setup-form">
         <fieldset class="label-setup-form">
           <legend>Mode de jeu</legend>
           <label>
-            1 joueur (contre l'IA)
             <input type="radio" name="mode" value="solo" checked>
+            1 joueur (contre l'IA)
           </label>
           <label>
-            2 joueurs
             <input type="radio" name="mode" value="duo" id="input-duo">
+            2 joueurs
           </label>
         </fieldset>
         <label class="label-setup-form">
           Pseudo
-          <input type="text" name="username" required/>
+          <input type="text" name="username" maxlength="16" required  pattern=".*\S.*"/>
         </label>
         <label class="label-setup-form" data-mode="duo">
           Pseudo joueur 2
-          <input type="text" name="username2"/>
+          <input type="text" name="username2" maxlength="16"  pattern=".*\S.*"/>
         </label>
         <label class="label-setup-form">
           Taille du tableau
@@ -55,19 +72,19 @@
             <option value="normal">Normal</option>
           </select>
         </label>
-        <button type="submit">Valider</button>
+        <button type="submit" class="btn-pixel btn-pixel--dark">Valider</button>
+        <button type="button" id="close-menu" class="btn-pixel btn-pixel--dark">Fermer</button>
       </form>
     </div>
-    <div id="board"></div>
-  </main>
-
+  </div>
   <dialog id="end-screen">
-    <div class="container-end-message">
+    <div class="end-screen-panel">
+      <p class="end-screen-title blink">Game Over</p>
       <p class="end-message"></p>
-    </div>
-    <div class="container-restart">
-      <button type="button" class="restart-dialog">Rejouer</button>
-      <button type="button" class="new-game-dialog">Nouvelle partie</button>
+      <div class="container-restart">
+        <button type="button" class="restart-dialog btn-pixel">Rejouer</button>
+        <button type="button" class="new-game-dialog btn-pixel">Nouvelle partie</button>
+      </div>
     </div>
   </dialog>
 

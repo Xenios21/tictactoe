@@ -1,4 +1,4 @@
-import type {Difficulty, GameMode, Player} from "./gameState.types.ts";
+import type {Difficulty, GameMode, Player} from "../game/game.types.ts";
 
 export interface GameSettings{
     username: string;

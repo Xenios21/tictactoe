@@ -1,4 +1,4 @@
-import type {GameState} from "./types/gameState.types.ts";
+import type {GameState} from "../game/game.types.ts";
 
 function getBoard(): HTMLElement{
     return document.querySelector('#board')!;
@@ -9,7 +9,7 @@ export function renderBoard(boardSize: number, onCellClick: (index: number) => v
     board.style.setProperty('--size', String(boardSize));
     board.innerHTML = '';
 
-    let totalBoardSize = boardSize * boardSize;
+    const totalBoardSize = boardSize * boardSize;
 
     for(let iCase = 0; iCase < totalBoardSize; iCase++){
         const cell = document.createElement('button');
